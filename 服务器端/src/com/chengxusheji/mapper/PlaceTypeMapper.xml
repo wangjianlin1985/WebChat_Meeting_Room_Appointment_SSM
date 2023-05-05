@@ -1,0 +1,48 @@
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--namespace命名空间，为了对sql语句进行隔离，方便管理，mapper开发dao方式，使用namespace有特殊作用  
+mapper代理开发时将namespace指定为mapper接口的全限定名  
+ -->
+<mapper namespace="com.chengxusheji.mapper.PlaceTypeMapper"> 
+<!--在mapper.xml文件中配置很多的sql语句，执行每个sql语句时，封装为MappedStatement对象 
+mapper.xml以statement为单位管理sql语句  
+ -->
+	<!-- 添加会议室类型记录 -->
+	<insert id="addPlaceType" parameterType="placeType">
+		insert into t_placeType(placeTypeName,placeTypeDesc) values 
+		(#{placeTypeName},#{placeTypeDesc})
+	</insert>
+
+	<!-- 按照查询条件分页查询会议室类型记录 -->
+	<select id="queryPlaceType" resultMap="placeTypeMap" >
+		select t_placeType.* from t_placeType ${where} limit #{startIndex},#{pageSize}
+	</select>
+	<resultMap id="placeTypeMap" type="placeType">
+        <id property="placeTypeId" column="placeTypeId" />
+    </resultMap>
+
+    <!-- 按照查询条件查询所有会议室类型记录 -->
+	<select id="queryPlaceTypeList" resultMap="placeTypeMap" >
+		select t_placeType.* from t_placeType ${where}
+	</select>
+
+    <!-- 按照查询条件的会议室类型记录数 -->
+	<select id="queryPlaceTypeCount" resultType="int">
+		select count(*) from t_placeType ${where}
+	</select>
+
+	<!-- 根据主键查询某个会议室类型记录 -->
+	<select id="getPlaceType" parameterType="int" resultMap="placeTypeMap">
+		select * from t_placeType where t_placeType.placeTypeId = #{placeTypeId}
+	</select>
+
+	<!-- 更新会议室类型记录 -->
+	<update id="updatePlaceType" parameterType="placeType">
+		update t_placeType set placeTypeName=#{placeTypeName},placeTypeDesc=#{placeTypeDesc} where placeTypeId = #{placeTypeId}
+	</update>
+
+	<!-- 删除会议室类型记录 -->
+	<delete id="deletePlaceType" parameterType="int">
+		delete from t_placeType where placeTypeId=#{placeTypeId}
+	</delete>
+
+</mapper>

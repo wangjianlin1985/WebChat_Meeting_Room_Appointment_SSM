@@ -1,0 +1,34 @@
+<view class="container">
+  <loading hidden="{{loadingHide}}">
+    {{loadingText}}
+  </loading>
+  <view class="title">编辑会议室类型</view>
+
+  <view class="placeType_modify_view">
+    <form bindsubmit="formSubmit">
+       <view class="formItem">
+        <view class="label">会议室类型id：</view>
+        <view class="formControl">
+          <input type="text" name="placeType.placeTypeId" disabled="true" value="{{placeTypeId}}" />
+        </view>
+      </view>
+      <view class="formItem">
+        <view class="label">会议室类型名称：</view>
+        <view class="formControl">
+          <input type="text" name="placeType.placeTypeName" placeholder="请输入会议室类型名称" value="{{placeTypeName}}" />
+        </view>
+      </view>
+
+      <view class="formItem" style="align-items:flex-start;">
+        <view class="label">会议室类型说明：</view>
+        <view class="formControl">
+           <textarea placeholder="请输入会议室类型说明" maxlength="800" name="placeType.placeTypeDesc" value="{{placeTypeDesc}}" />
+        </view>
+      </view>
+
+      <view>
+        <button class="vBtn_ok" formType="submit" disabled="{{disabled}}">提交修改</button>
+      </view>
+    </form>
+  </view>
+</view>

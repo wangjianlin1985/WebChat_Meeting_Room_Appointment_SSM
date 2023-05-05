@@ -1,0 +1,81 @@
+<view class="container">
+  <loading hidden="{{loadingHide}}">
+    {{loadingText}}
+  </loading>
+
+  <view class="title">会议室详情</view>
+  <view class="place_detail_view"> 
+      <view class="viewItem">
+        <view class="label">会议室id：</view>
+        <view class="content">
+          <view>{{placeId}}</view>
+        </view>
+      </view>
+
+       <view class="viewItem">
+        <view class="label">会议室类型：</view>
+        <view class="content"> 
+          <view>{{placeTypeObj}}</view>
+        </view>
+      </view>
+
+       <view class="viewItem">
+        <view class="label">会议室名称：</view>
+        <view class="content"> 
+          <view>{{placeName}}</view>
+        </view>
+      </view>
+
+       <view class="viewItem">
+        <view class="label">会议室照片：</view>
+        <view class="content"> 
+          <image mode="aspectFill" src="{{placePhotoUrl}}"></image>
+        </view>
+      </view>
+
+       <view class="viewItem">
+        <view class="label">容纳人数：</view>
+        <view class="content"> 
+          <view>{{personNum}}</view>
+        </view>
+      </view>
+
+       <view class="viewItem">
+        <view class="label">会议室位置：</view>
+        <view class="content"> 
+          <view>{{placeLocation}}</view>
+        </view>
+      </view>
+
+       <view class="viewItem">
+        <view class="label">会议室单价：</view>
+        <view class="content"> 
+          <view>{{price}}</view>
+        </view>
+      </view>
+
+       <view class="viewItem">
+        <view class="label">详细介绍：</view>
+        <view class="content"> 
+          <view>{{placeDesc}}</view>
+        </view>
+      </view>
+
+       <view class="viewItem">
+        <view class="label">发布时间：</view>
+        <view class="content"> 
+          <view>{{addTime}}</view>
+        </view>
+      </view>
+
+      <view>
+        <button class="vBtn_ok" formType="submit" catchtap="addOrder">我要预约</button>
+      </view>
+
+
+      <view>
+        <navigator class="btnReturn" open-type="navigateBack" hover-class="navigator-hover">返回</navigator>
+      </view>
+
+  </view>
+</view>

@@ -1,0 +1,80 @@
+<view class="container">
+  <view class="toggleQview" bindtap="toggleQueryViewHide" style="padding:5px;">显示或隐藏查询视图</view>
+  <view class="queryView" hidden="{{queryViewHidden}}">
+    <view class="queryParams">
+      <view class="queryItem">
+        <view class="label">会议室类型：</view>
+        <view class="searchControl">
+          <picker bindchange="bind_placeTypeObj_change" value="{{placeTypeObj_Index}}" range-key="placeTypeName" range="{{placeTypes}}">
+            <view class="value" name="types">
+              <input style="width:75%;display:inline-block;float:left;" value="{{placeTypes[placeTypeObj_Index].placeTypeName}}"></input>
+              <image class="arrow-r" src="/images/arrow-r-0.png"></image>
+            </view>
+          </picker> 
+        </view>
+      </view>
+
+      <view class="queryItem">
+        <view class="label">会议室名称：</view>
+        <view class="searchControl"><input data-id="placeName" placeholder="请输入会议室名称关键字" value="{{placeName}}" bindinput="searchValueInput" /></view>
+      </view>
+
+      <view class="queryItem">
+        <view class="label">会议室位置：</view>
+        <view class="searchControl"><input data-id="placeLocation" placeholder="请输入会议室位置关键字" value="{{placeLocation}}" bindinput="searchValueInput" /></view>
+      </view>
+
+      <view class="queryItem">
+        <view class="label">发布时间：</view>
+         <view class="searchControl">
+          <picker mode="date" value="{{addTime}}" start="1970-01-01" end="2030-01-01" bindchange="bind_addTime_change" >
+            <view>
+              <input style="width:75%;display:inline-block;float:left;" placeholder="选择发布时间" value="{{addTime}}"></input>
+              <text class="clearButton" catchtap="clear_addTime">x</text>
+            </view>
+          </picker> 
+        </view>
+      </view>
+
+    </view>
+
+    <view class="queryButton">
+       <button class="font_12 fl_r op-btn mr_10" bindtap="queryPlace">查询</button>
+    </view>
+  </view>
+
+  <view class="placeList">
+  <block wx:for-items="{{places}}" wx:key="{{index}}">
+    <view class="placeItem">
+        <view class="placeImg">
+          <image src="{{item.placePhotoUrl}}"></image>
+        </view>
+        <navigator url="place_detail?placeId={{item.placeId}}" hover-class="navigator-hover">
+        <view class="placeText">
+          <view>会议室类型：{{item.placeTypeObj.placeTypeName}}</view>
+          <view>会议室名称：{{item.placeName}}</view>
+          <view>容纳人数：{{item.personNum}}</view>
+          <view>会议室位置：{{item.placeLocation}}</view>
+          <view>会议室单价：{{item.price}}</view>
+          <view>发布时间：{{item.addTime}}</view>
+        </view>
+        </navigator>
+    </view>
+    <view class="opt_view" style="display:none;">
+      <button class="font_12 fl_r del-btn mr_10" bindtap="removePlace" data-placeid="{{item.placeId}}">删除</button> 
+      <navigator url="place_modify?placeId={{item.placeId}}" hover-class="navigator-hover">
+        <button class="font_12 fl_r op-btn mr_10">编辑</button>
+      </navigator>
+    </view>
+  </block>
+  </view>
+
+  <view hidden="{{loading_hide}}" class="loading">
+    <view class="loadingImg"><image src="/images/loading.gif" mode="aspectFill"></image></view>
+    <view class="loadingTxt">..加载中..</view>
+  </view>
+  <view class="nodata_view" hidden="{{nodata_hide}}">
+    <image src="/images/Noline.png" mode="widthFix"></image>
+  </view>
+</view>
+

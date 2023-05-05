@@ -1,0 +1,90 @@
+<view class="container">
+  <loading hidden="{{loadingHide}}">
+    {{loadingText}}
+  </loading>
+  <view class="title">编辑会议室</view>
+
+  <view class="place_modify_view">
+    <form bindsubmit="formSubmit">
+       <view class="formItem">
+        <view class="label">会议室id：</view>
+        <view class="formControl">
+          <input type="text" name="place.placeId" disabled="true" value="{{placeId}}" />
+        </view>
+      </view>
+      <view class="formItem">
+        <view class="label">会议室类型：</view>
+        <view class="formControl">
+          <picker bindchange="bind_placeTypeObj_change" value="{{placeTypeObj_Index}}" range-key="placeTypeName" range="{{placeTypes}}">
+            <view style="display:flex;border:1px solid green;">
+              <input hidden="true" name="place.placeTypeObj.placeTypeId" value="{{placeTypes[placeTypeObj_Index].placeTypeId}}" />
+              <input style="width:90%;border:0px;" value="{{placeTypes[placeTypeObj_Index].placeTypeName}}"></input>
+              <image class="arrow-r" src="/images/arrow-r-0.png"></image>
+            </view>
+          </picker> 
+        </view>
+      </view>
+
+      <view class="formItem">
+        <view class="label">会议室名称：</view>
+        <view class="formControl">
+          <input type="text" name="place.placeName" placeholder="请输入会议室名称" value="{{placeName}}" />
+        </view>
+      </view>
+
+       <view class="formItem">
+        <view class="label">会议室照片：</view>
+        <view class="formControl" bindtap="select_placePhoto">
+          <input type="text" hidden="true" name="place.placePhoto" value="{{placePhoto}}" />
+          <image class="uploadPic" mode="aspectFill" src="{{placePhotoUrl}}"></image>
+          <image wx:for="{{placePhotoList}}" class="uploadPic" mode="aspectFill" src="{{item}}" wx:key=""></image>
+          <image src="../../images/upic.png" class="uploadPic" mode="widthFix"></image>
+        </view>
+      </view>
+
+      <view class="formItem">
+        <view class="label">容纳人数：</view>
+        <view class="formControl">
+          <input type="text" name="place.personNum" placeholder="请输入容纳人数" value="{{personNum}}" />
+        </view>
+      </view>
+
+      <view class="formItem">
+        <view class="label">会议室位置：</view>
+        <view class="formControl">
+          <input type="text" name="place.placeLocation" placeholder="请输入会议室位置" value="{{placeLocation}}" />
+        </view>
+      </view>
+
+      <view class="formItem">
+        <view class="label">会议室单价：</view>
+        <view class="formControl">
+          <input type="text" name="place.price" placeholder="请输入会议室单价" value="{{price}}" />
+        </view>
+      </view>
+
+      <view class="formItem" style="align-items:flex-start;">
+        <view class="label">详细介绍：</view>
+        <view class="formControl">
+           <textarea placeholder="请输入详细介绍" maxlength="800" name="place.placeDesc" value="{{placeDesc}}" />
+        </view>
+      </view>
+
+       <view class="formItem">
+        <view class="label">发布时间：</view>
+        <view class="formControl">
+          <picker mode="date"  start="1970-01-01" end="2030-01-01" value="{{addTime}}" bindchange="bind_addTime_change" >
+            <view style="display:flex;border:1px solid green;">
+              <input style="width:90%;border:0px;" name="place.addTime" placeholder="选择发布时间"  value="{{addTime}}"></input>
+              <text class="clearButton" catchtap="clear_addTime">x</text>
+            </view>
+          </picker>
+        </view>
+      </view>
+
+      <view>
+        <button class="vBtn_ok" formType="submit" disabled="{{disabled}}">提交修改</button>
+      </view>
+    </form>
+  </view>
+</view>

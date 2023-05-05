@@ -1,0 +1,34 @@
+<view class="container">
+  <loading hidden="{{loadingHide}}">
+    {{loadingText}}
+  </loading>
+
+  <view class="title">会议室类型详情</view>
+  <view class="placeType_detail_view"> 
+      <view class="viewItem">
+        <view class="label">会议室类型id：</view>
+        <view class="content">
+          <view>{{placeTypeId}}</view>
+        </view>
+      </view>
+
+       <view class="viewItem">
+        <view class="label">会议室类型名称：</view>
+        <view class="content"> 
+          <view>{{placeTypeName}}</view>
+        </view>
+      </view>
+
+       <view class="viewItem">
+        <view class="label">会议室类型说明：</view>
+        <view class="content"> 
+          <view>{{placeTypeDesc}}</view>
+        </view>
+      </view>
+
+      <view>
+        <navigator class="btnReturn" open-type="navigateBack" hover-class="navigator-hover">返回</navigator>
+      </view>
+
+  </view>
+</view>

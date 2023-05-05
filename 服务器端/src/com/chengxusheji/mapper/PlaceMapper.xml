@@ -1,0 +1,49 @@
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--namespace命名空间，为了对sql语句进行隔离，方便管理，mapper开发dao方式，使用namespace有特殊作用  
+mapper代理开发时将namespace指定为mapper接口的全限定名  
+ -->
+<mapper namespace="com.chengxusheji.mapper.PlaceMapper"> 
+<!--在mapper.xml文件中配置很多的sql语句，执行每个sql语句时，封装为MappedStatement对象 
+mapper.xml以statement为单位管理sql语句  
+ -->
+	<!-- 添加会议室记录 -->
+	<insert id="addPlace" parameterType="place">
+		insert into t_place(placeTypeObj,placeName,placePhoto,personNum,placeLocation,price,placeDesc,addTime) values 
+		(#{placeTypeObj.placeTypeId},#{placeName},#{placePhoto},#{personNum},#{placeLocation},#{price},#{placeDesc},#{addTime})
+	</insert>
+
+	<!-- 按照查询条件分页查询会议室记录 -->
+	<select id="queryPlace" resultMap="placeMap" >
+		select t_place.* from t_place,t_placeType ${where} and t_place.placeTypeObj = t_placeType.placeTypeId limit #{startIndex},#{pageSize}
+	</select>
+	<resultMap id="placeMap" type="place">
+        <id property="placeId" column="placeId" />
+        <association property="placeTypeObj" column="placeTypeObj" select="com.chengxusheji.mapper.PlaceTypeMapper.getPlaceType" />
+    </resultMap>
+
+    <!-- 按照查询条件查询所有会议室记录 -->
+	<select id="queryPlaceList" resultMap="placeMap" >
+		select t_place.* from t_place,t_placeType ${where} and t_place.placeTypeObj = t_placeType.placeTypeId
+	</select>
+
+    <!-- 按照查询条件的会议室记录数 -->
+	<select id="queryPlaceCount" resultType="int">
+		select count(*) from t_place,t_placeType ${where} and t_place.placeTypeObj = t_placeType.placeTypeId
+	</select>
+
+	<!-- 根据主键查询某个会议室记录 -->
+	<select id="getPlace" parameterType="int" resultMap="placeMap">
+		select * from t_place where t_place.placeId = #{placeId}
+	</select>
+
+	<!-- 更新会议室记录 -->
+	<update id="updatePlace" parameterType="place">
+		update t_place set placeTypeObj=#{placeTypeObj.placeTypeId},placeName=#{placeName},placePhoto=#{placePhoto},personNum=#{personNum},placeLocation=#{placeLocation},price=#{price},placeDesc=#{placeDesc},addTime=#{addTime} where placeId = #{placeId}
+	</update>
+
+	<!-- 删除会议室记录 -->
+	<delete id="deletePlace" parameterType="int">
+		delete from t_place where placeId=#{placeId}
+	</delete>
+
+</mapper>

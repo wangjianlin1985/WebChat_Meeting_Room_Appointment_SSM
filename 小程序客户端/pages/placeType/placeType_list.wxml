@@ -1,0 +1,39 @@
+<view class="container">
+  <view class="toggleQview" bindtap="toggleQueryViewHide" style="padding:5px;">显示或隐藏查询视图</view>
+  <view class="queryView" hidden="{{queryViewHidden}}">
+    <view class="queryParams">
+    </view>
+
+    <view class="queryButton">
+       <button class="font_12 fl_r op-btn mr_10" bindtap="queryPlaceType">查询</button>
+    </view>
+  </view>
+
+  <view class="placeTypeList">
+  <block wx:for-items="{{placeTypes}}" wx:key="{{index}}">
+    <view class="placeTypeItem">
+        <navigator url="placeType_detail?placeTypeId={{item.placeTypeId}}" hover-class="navigator-hover">
+        <view class="placeTypeText">
+          <view>会议室类型id：{{item.placeTypeId}}</view>
+          <view>会议室类型名称：{{item.placeTypeName}}</view>
+        </view>
+        </navigator>
+    </view>
+    <view class="opt_view" style="display:none;">
+      <button class="font_12 fl_r del-btn mr_10" bindtap="removePlaceType" data-placetypeid="{{item.placeTypeId}}">删除</button> 
+      <navigator url="placeType_modify?placeTypeId={{item.placeTypeId}}" hover-class="navigator-hover">
+        <button class="font_12 fl_r op-btn mr_10">编辑</button>
+      </navigator>
+    </view>
+  </block>
+  </view>
+
+  <view hidden="{{loading_hide}}" class="loading">
+    <view class="loadingImg"><image src="/images/loading.gif" mode="aspectFill"></image></view>
+    <view class="loadingTxt">..加载中..</view>
+  </view>
+  <view class="nodata_view" hidden="{{nodata_hide}}">
+    <image src="/images/Noline.png" mode="widthFix"></image>
+  </view>
+</view>
+
